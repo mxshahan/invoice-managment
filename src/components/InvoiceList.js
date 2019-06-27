@@ -20,54 +20,71 @@ class InvoiceList extends React.Component {
   removeInvoice = id => this.props.removeInvoice(id);
 
   renderInvoiceList = () => {
+    let cnt=1,total=0;
     const { invoice } = this.props;
     if (invoice.invoices.length > 0)
       return (
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {invoice.invoices.map((invoice, i) => (
-              <tr key={i}>
-                <th scope="row">{i + 1}</th>
-                <td>{invoice.name}</td>
-                <td>{invoice.price}</td>
-                <td>{invoice.quantity}</td>
-                <td>
-                  <a
-                    href="#!"
-                    className="text-danger"
-                    onClick={() => this.removeInvoice(invoice.id)}
-                  >
-                    Remove
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="row">
+            <div className="col-md-12">
+                <table className="allUser-table invoice-list">
+                  <tr className="no-bg">
+                      <th>No</th>
+                      <th>Description</th>
+                      <th>Qty</th>
+                      <th>Price</th>
+                      <th>Subtotal</th>
+                  </tr>
+                  {invoice.invoices.map(item=>{
+                    total+=(item.price * item.quantity)
+                    return(
+                      <tr>
+                        <td><p>{cnt++}</p></td>
+                        <td><p className="name">{item.name}</p></td>
+                        <td><p className="date">{item.quantity}</p></td>
+                        <td><p className="amount">${item.price}</p></td>
+                        <td><p className="recieved">${item.price * item.quantity}</p></td>
+                      </tr>
+                  )})}
+                  <tr className="no-mg">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><p className="subtotal">Subtotal:</p></td>
+                    <td><p className="subtotal">${total}</p></td>
+                  </tr>
+                  <tr className="no-mg">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><p>Vat(3%)</p></td>
+                    <td><p>${(total*3)/100}</p></td>
+                  </tr>
+                  <tr className="no-mg">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><p>Total: </p></td>
+                    <td><p>${((total*3)/100)+total}</p></td>
+                  </tr>
+              </table>
+          </div>
+        </div>
       );
     else
       return (
-        <div>
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-          </table>
-          <h3 className="text-danger mt-4 text-center">Item Not Added Yet.</h3>
+          <div className="row">
+            <div className="col-md-12">
+                <table className="allUser-table invoice-list">
+                  <tr className="no-bg">
+                      <th>No</th>
+                      <th>Description</th>
+                      <th>Qty</th>
+                      <th>Price</th>
+                      <th>Subtotal</th>
+                  </tr>
+              </table>
+              <h3 className="text-danger mt-4 text-center">Item Not Added Yet.</h3>
+          </div>
         </div>
       );
   };

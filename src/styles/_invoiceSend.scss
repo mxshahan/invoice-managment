@@ -1,0 +1,58 @@
+.sendInvoce-heading{
+    
+}
+.sendInvoce-heading h2{
+    background-color: #34CFCD;
+    padding: 60px 10px 10px;
+    display: inline-block;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 25px;
+}
+.sendInvoce-date p{
+    padding-top: 77px;
+    text-align: right;
+    margin-bottom: 0;
+    color: #84868a;
+    letter-spacing: .5px;
+}
+.p-to{
+    text-align: right;
+    color: #84868a;
+}
+.p-for{color: #84868a}
+.p-to h2, .p-for h2{
+    color: #626467;
+}
+.underline-arrow{
+    width: 100%;
+    height: 2px;
+    background-color: #34CFCD;
+    margin-top: 12px;
+    position: relative;
+}
+.parag{
+    color: #34CFCD;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.arrow{
+    margin-top: 80px;
+    margin-bottom: 15px;
+}
+.left, .right{
+    position: absolute;
+    top: -6px;
+    color: #34CFCD;
+    font-size: 14px;
+}
+.right{right: 0}
+.invoice-list th{ 
+    border-top: 0px solid #ccced35c;
+    border-bottom: 2px solid #ccced35c;
+    text-transform: uppercase;
+}
+.invoice-list p{background:none;}
+.invoice-list tr:hover{transform: none}
+.no-mg p{padding: 0;}
+.subtotal{padding-top: 30px !important}

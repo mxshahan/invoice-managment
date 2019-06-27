@@ -9,7 +9,7 @@ export default function(state = initialState, action) {
     case ADD_INVOICE:
       return {
         ...state,
-        invoices: [...state.invoices, action.payload]
+        invoices: [...state.invoices, ...action.payload]
       };
     case REMOVE_INVOICE:
       return {

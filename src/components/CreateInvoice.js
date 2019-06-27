@@ -12,10 +12,21 @@ class CreateInvoice extends React.Component {
     quantity: "",
     currency: "USD",
     price: "",
-    errors: {}
+    errors: {},
+    eachItem: []
   };
-  handleChange = e =>
+  save = (e)=>{
+    e.preventDefault();
+    this.props.createInvoice(this.state.eachItem, this.props.history);
+  }
+  handleDelete = index=>{
+    const eachItem = this.state.eachItem;
+    eachItem.splice(index, 1);
+    this.setState(()=>({eachItem}))
+  };
+  handleChange = e =>{
     this.setState({ [e.target.name]: e.target.value, errors: {} });
+  }
 
   componentDidMount() {
     this.setState({
@@ -23,8 +34,10 @@ class CreateInvoice extends React.Component {
       quantity: "",
       price: "",
       currency: "USD",
-      errors: {}
-    });
+      errors: {},
+      eachItem: []
+      }
+    );
   }
 
   handleSubmit = e => {
@@ -42,7 +55,6 @@ class CreateInvoice extends React.Component {
       errors.price = "Price can't be empty";
       return this.setState({ errors });
     }
-
     const newInvoiceDate = {
       id: uuid(),
       name,
@@ -50,25 +62,31 @@ class CreateInvoice extends React.Component {
       price,
       currency
     };
-
-    this.props.createInvoice(newInvoiceDate, this.props.history);
+    this.setState((prevState)=>({eachItem: [newInvoiceDate, ...prevState.eachItem]}));
+    // this.props.createInvoice(newInvoiceDate, this.props.history);
+    // console.log(this.state.eachItem);
   };
   render() {
+    let cnt= 1;
     const { errors } = this.state;
-
     return (
       <div>
-        <nav className="navbar navbar-expand-sm bg-dark sticky-top">
-          <div className="container">
-            <p className="navbar-brand">Add New Item</p>
-          </div>
-        </nav>
-
+        <div className="invoice-hedg">
+            <div className="container">
+                <div className="row">
+                <div className="col-md-12">
+                    <div className="heading-alluser">
+                        <h2 className="invoice"><span className="underline invoice-underline add-new">Add New Item</span></h2>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
         <div className="container mt-2">
-          <form onSubmit={this.handleSubmit}>
+          <form >
             <div className="row">
               <div className="col-md-3 ma">
-                <label>Name</label>
+                <label>Name: </label>
                 <input
                   type="name"
                   name="name"
@@ -81,9 +99,9 @@ class CreateInvoice extends React.Component {
                 )}
               </div>
               <div className="col-md-3 ma">
-                <label>Quantity</label>
+                <label>Quantity: </label>
                 <input
-                  type="text"
+                  type="number"
                   name="quantity"
                   value={this.state.quantity}
                   onChange={this.handleChange}
@@ -93,11 +111,10 @@ class CreateInvoice extends React.Component {
                   <small className="text-danger">{errors.quantity}</small>
                 )}
               </div>
-              <div className="col-md-3">
-                <label>Currency</label>
+              <div className="col-md-3 own">
+                <label>Currency: 
                 <select
                   className="form-control"
-                  value={this.state.currency}
                   onChange={this.handleChange}
                   name="currency"
                 >
@@ -106,9 +123,10 @@ class CreateInvoice extends React.Component {
                   <option value="GBP">GBP</option>
                   <option value="INR">INR</option>
                 </select>
+                </label>
               </div>
               <div className="col-md-3 ma">
-                <label>Price</label>
+                <label>Price: </label>
                 <input
                   type="number"
                   name="price"
@@ -123,13 +141,46 @@ class CreateInvoice extends React.Component {
               </div>
             </div>
             <div className="mt-3">
-              <input type="submit" className="my-btn" value="Add New Invoice" />
+              <button onClick={this.handleSubmit} className="my-btn">Add New Invoice</button>
               <Link to="/" className="my-btn ml-4">
                 Cancel
               </Link>
+              <button 
+                onClick={this.save} 
+                className="my-btn no-mg f-right"
+                disabled={this.state.eachItem.length !== 0 ? false : true }
+              >Save </button>
             </div>
           </form>
         </div>
+        { this.state.eachItem.length !== 0 ?
+        (<div className="container">
+          <div className="row">
+            <div className="col-md-12">
+                <table className="allUser-table add-nw-table">
+                  <tr className="no-bg">
+                      <th>No</th>
+                      <th>Client Name</th>
+                      <th>Quantity</th>
+                      <th>Currency</th>
+                      <th>Price</th>
+                  </tr>
+                  {this.state.eachItem.map((item, index)=>(
+                    <tr className="">
+                      <td><p>{cnt++}</p></td>
+                      <td><p className="name">{item.name}</p></td>
+                      <td><p className="date">{item.quantity}</p></td>
+                      <td><p className="amount">{item.currency}</p></td>
+                      <td className="item-row">
+                        <p className="recieved">{item.price}</p>
+                        <button onClick={()=>{this.handleDelete(index)}} className="delete-item"><i class="far fa-times-circle"></i></button>
+                      </td>
+                    </tr>
+                  ))}
+              </table>
+          </div>
+          </div>
+        </div>) : null}
       </div>
     );
   }

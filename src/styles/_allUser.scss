@@ -1,0 +1,107 @@
+.create-invoice{
+    background-color: #1DD7CC;
+    float: right;
+    margin-top: 25px;
+    padding: 7px 50px 7px 25px;
+    border-radius: 25px;
+    font-size: 17px;
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+.btn-action{
+    background-color: #1DD7CC;
+    border-radius: 25px;
+    font-size: 17px;
+    padding: 3.5px 20px;
+}
+.invoice-hedg{
+    padding: 35px 0;
+    background-color: #fff;
+}
+.heading-alluser h2, .heading-alluser h3{
+    display: inline-block;
+}
+.company-name{
+    text-align: right;
+    float: right;
+    color: #6B70C1;
+    font-size: 22px;
+    text-transform: capitalize;
+}
+.invoice{
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: bold;
+    color: #515151;
+}
+.tble-heading{
+    position: relative;
+    font-weight: bold;
+    color: #515151;
+    font-size: 35px;
+}
+.underline::before{
+    content: "";
+    position: absolute;
+    width: 6%;
+    height: 3px;
+    background-color: #34CFCD;
+    bottom: -5px;
+    left: 3px;
+}
+.heading-top{
+    color: #adafb3;
+    margin-bottom: 0;
+}
+.main-heading{
+    padding: 15px 0 30px;
+}
+.btn-icon{
+    position: absolute;
+    font-size: 40px;
+    top: -12px;
+    right: 24px;
+}
+.invoice-underline::before{
+    width: 9%;
+    background-color: #acf7f7;
+    bottom: 2px;
+    left: 16px;
+}
+.allUser-table{
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 100px;
+    color: #adafb3;
+    text-align: center;
+}
+.allUser-table th{
+    color: #adafb3;
+    border-top: 2px solid #ccced35c;
+    padding: 30px 0 20px;
+    font-weight: normal;
+    text-align: center;
+}
+.allUser-table tr{
+    margin: 3px 0;
+}
+.allUser-table p{
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    margin-right: -2px;
+}
+.action-cover{
+    padding: 10px 0 !important;
+}
+.name{color: #4674e0}
+.date{font-weight: bold;color: #797474}
+.no-bg{background: none !important;}
+tr{transition: .15s}
+tr:hover{
+    transform: scale(1.02)
+}
+.no-bg:hover{
+    transform: none !important;
+}
