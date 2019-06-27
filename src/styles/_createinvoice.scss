@@ -60,4 +60,7 @@ form select{
 }
 .delete-item:hover{color: red}
 button:focus{outline: none}
-.no-mg{margin-top: 0;}
+.no-mg{
+    margin-top: -25px;
+    margin-right: 24px;
+}
