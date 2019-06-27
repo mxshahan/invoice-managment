@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
+import validator from 'validator';
 
 import InvoiceList from "../components/InvoiceList";
 
@@ -17,8 +18,7 @@ class InvoicePrepend extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { email, errors } = this.state;
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(email)) {
+    if (!validator.isEmail(email)) {
       errors.email = "A valid Email is required";
       return this.setState({ errors });
     }
@@ -27,7 +27,6 @@ class InvoicePrepend extends React.Component {
       email,
       invoices: this.props.invoice.invoices
     };
-    console.log(dataToSubmit);
     alert(dataToSubmit);
   };
 
@@ -37,6 +36,7 @@ class InvoicePrepend extends React.Component {
     }
   }
   render() {
+    const { email, errors } = this.state;
     return (
       <div className="container">
         <div className="row">
@@ -46,7 +46,7 @@ class InvoicePrepend extends React.Component {
             </div>
           </div>
           <div className="col-md-6">
-          <div className="sendInvoce-date">
+            <div className="sendInvoce-date">
               <p>Reciept #01234 . June 27,  2019 </p>
             </div>
           </div>
@@ -85,6 +85,48 @@ class InvoicePrepend extends React.Component {
           </div>
         </div>
         <InvoiceList />
+
+        {(
+          <div className="mt-5">
+            <form onSubmit={this.handleSubmit}>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <strong>Bill To</strong>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="email"
+                  onChange={this.handleChange}
+                  value={email}
+                  className="form-control "
+                  style={errors.email && {
+                    border: '1px solid red',
+                  }}
+                />
+              </div>
+              <p className="mb-2">
+                {errors.email && (
+                  <small className="text-danger">{errors.email}</small>
+                )}
+              </p>
+            </form>
+            <div className="row mt-3 mb-5">
+              <div className="col">
+                <Link to="/" className="my-btn " onClick={this.handleSubmit}>
+                  Send Invoice
+              </Link>
+              </div>
+
+              <div>
+                <Link to="/createinvoice" className="my-btn ml-4">
+                  Add More Item
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
