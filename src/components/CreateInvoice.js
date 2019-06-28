@@ -139,7 +139,7 @@ class CreateInvoice extends React.Component {
                   </select>
                 </label>
               </div>
-              <div className="col-md-3 ma">
+              <div className="col-md-3">
                 <label>Price: </label>
                 <input
                   type="number"
@@ -154,7 +154,7 @@ class CreateInvoice extends React.Component {
                 )}
               </div>
             </div>
-            <div className="text-right">
+            <div className="col-md-12 text-right">
               <button onClick={this.handleSubmit} className="my-btn">Save</button>
               <Link to="/" className="my-btn ml-4">
                 Cancel
