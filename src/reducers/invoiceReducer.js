@@ -4,7 +4,7 @@ const initialState = {
   invoices: []
 };
 
-export default function(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_INVOICE:
       return {
